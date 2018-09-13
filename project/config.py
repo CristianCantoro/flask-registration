@@ -36,6 +36,7 @@ class BaseConfig(object):
     WTF_CSRF_ENABLED = True
     DEBUG_TB_ENABLED = False
     DEBUG_TB_INTERCEPT_REDIRECTS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # mail settings
     # defaults are:
@@ -62,6 +63,8 @@ class DevelopmentConfig(BaseConfig):
     WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'dev.sqlite')
     DEBUG_TB_ENABLED = True
+    MAIL_SUPPRESS_SEND = False
+    MAIL_DEBUG = True
 
 
 class TestingConfig(BaseConfig):

@@ -89,8 +89,8 @@ class TestUserViews(BaseTestCase):
             )
             self.assertTrue(response.status_code == 200)
             self.assertTrue(current_user.email == "test@user.com")
-            self.assertTrue(current_user.is_active())
-            self.assertTrue(current_user.is_authenticated())
+            self.assertTrue(current_user.is_active)
+            self.assertTrue(current_user.is_authenticated)
             self.assertTemplateUsed('main/index.html')
 
     def test_incorrect_login(self):
@@ -103,8 +103,8 @@ class TestUserViews(BaseTestCase):
             )
             self.assertTrue(response.status_code == 200)
             self.assertIn(b'Invalid email and/or password.', response.data)
-            self.assertFalse(current_user.is_active())
-            self.assertFalse(current_user.is_authenticated())
+            self.assertFalse(current_user.is_active)
+            self.assertFalse(current_user.is_authenticated)
             self.assertTemplateUsed('user/login.html')
 
     def test_profile_route_requires_login(self):
@@ -184,7 +184,7 @@ class TestUserViews(BaseTestCase):
                 b'You can now change your password.',
                 response.data
             )
-            self.assertFalse(current_user.is_authenticated())
+            self.assertFalse(current_user.is_authenticated)
 
     def test_reset_forgotten_password_valid_token_correct_login(self):
         # Ensure user can confirm account with valid token.
@@ -209,9 +209,9 @@ class TestUserViews(BaseTestCase):
                 response.data
             )
             self.assertTemplateUsed('user/profile.html')
-            self.assertTrue(current_user.is_authenticated())
+            self.assertTrue(current_user.is_authenticated)
             self.client.get('/logout')
-            self.assertFalse(current_user.is_authenticated())
+            self.assertFalse(current_user.is_authenticated)
 
             response = self.client.post(
                 '/login',
@@ -220,8 +220,8 @@ class TestUserViews(BaseTestCase):
             )
             self.assertTrue(response.status_code == 200)
             self.assertTrue(current_user.email == "test@user.com")
-            self.assertTrue(current_user.is_active())
-            self.assertTrue(current_user.is_authenticated())
+            self.assertTrue(current_user.is_active)
+            self.assertTrue(current_user.is_authenticated)
             self.assertTemplateUsed('main/index.html')
 
     def test_reset_forgotten_password_valid_token_invalid_login(self):
@@ -247,9 +247,9 @@ class TestUserViews(BaseTestCase):
                 response.data
             )
             self.assertTemplateUsed('user/profile.html')
-            self.assertTrue(current_user.is_authenticated())
+            self.assertTrue(current_user.is_authenticated)
             self.client.get('/logout')
-            self.assertFalse(current_user.is_authenticated())
+            self.assertFalse(current_user.is_authenticated)
 
             response = self.client.post(
                 '/login',
@@ -257,7 +257,7 @@ class TestUserViews(BaseTestCase):
                 follow_redirects=True
             )
             self.assertTrue(response.status_code == 200)
-            self.assertFalse(current_user.is_authenticated())
+            self.assertFalse(current_user.is_authenticated)
             self.assertIn(
                 b'Invalid email and/or password.',
                 response.data
